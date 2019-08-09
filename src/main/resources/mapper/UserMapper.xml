@@ -1,0 +1,449 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.firststringboot.repository.mapper.UserMapper" >
+  <resultMap id="BaseResultMap" type="com.firststringboot.repository.domain.User" >
+    <id column="pk_user_id" property="pkUserId" jdbcType="BIGINT" />
+    <result column="account" property="account" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="salt" property="salt" jdbcType="VARCHAR" />
+    <result column="header_image" property="headerImage" jdbcType="VARCHAR" />
+    <result column="nick_name" property="nickName" jdbcType="VARCHAR" />
+    <result column="qq" property="qq" jdbcType="VARCHAR" />
+    <result column="phone" property="phone" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="DATE" />
+    <result column="total_total" property="totalTotal" jdbcType="INTEGER" />
+    <result column="dynamic_total" property="dynamicTotal" jdbcType="INTEGER" />
+    <result column="is_tourist" property="isTourist" jdbcType="BIT" />
+    <result column="is_Del" property="isDel" jdbcType="BIT" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    pk_user_id, account, name, password, sex, salt, header_image, nick_name, qq, phone, 
+    birthday, total_total, dynamic_total, is_tourist, is_Del, create_time, update_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where pk_user_id = #{pkUserId,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from user
+    where pk_user_id = #{pkUserId,jdbcType=BIGINT}
+  </delete>
+  <select id="selectObjectListByWhere" resultMap="BaseResultMap" parameterType="com.firststringboot.repository.domain.User" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    <where >
+      <if test="account != null" >
+        and account = #{account,jdbcType=VARCHAR}
+      </if>
+      <if test="name != null" >
+        and name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="password != null" >
+        and password = #{password,jdbcType=VARCHAR}
+      </if>
+      <if test="sex != null" >
+        and sex = #{sex,jdbcType=VARCHAR}
+      </if>
+      <if test="salt != null" >
+        and salt = #{salt,jdbcType=VARCHAR}
+      </if>
+      <if test="headerImage != null" >
+        and header_image = #{headerImage,jdbcType=VARCHAR}
+      </if>
+      <if test="nickName != null" >
+        and nick_name = #{nickName,jdbcType=VARCHAR}
+      </if>
+      <if test="qq != null" >
+        and qq = #{qq,jdbcType=VARCHAR}
+      </if>
+      <if test="phone != null" >
+        and phone = #{phone,jdbcType=VARCHAR}
+      </if>
+      <if test="birthday != null" >
+        and birthday = #{birthday,jdbcType=DATE}
+      </if>
+      <if test="totalTotal != null" >
+        and total_total = #{totalTotal,jdbcType=INTEGER}
+      </if>
+      <if test="dynamicTotal != null" >
+        and dynamic_total = #{dynamicTotal,jdbcType=INTEGER}
+      </if>
+      <if test="isTourist != null" >
+        and is_tourist = #{isTourist,jdbcType=BIT}
+      </if>
+      <if test="isDel != null" >
+        and is_Del = #{isDel,jdbcType=BIT}
+      </if>
+      <if test="createTime != null" >
+        and to_days(create_time) = to_days(#{createTime,jdbcType=TIMESTAMP})
+      </if>
+      <if test="updateTime != null" >
+        and to_days(update_time) = to_days(#{updateTime,jdbcType=TIMESTAMP})
+      </if>
+    </where>
+  </select>
+  <select id="selectByBillId" resultMap="BaseResultMap" >
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    <where >
+      <if test="selective != null" >
+        <if test="selective.account != null" >
+          and account = #{selective.account,jdbcType=VARCHAR}
+        </if>
+        <if test="selective.name != null" >
+          and name = #{selective.name,jdbcType=VARCHAR}
+        </if>
+        <if test="selective.password != null" >
+          and password = #{selective.password,jdbcType=VARCHAR}
+        </if>
+        <if test="selective.sex != null" >
+          and sex = #{selective.sex,jdbcType=VARCHAR}
+        </if>
+        <if test="selective.salt != null" >
+          and salt = #{selective.salt,jdbcType=VARCHAR}
+        </if>
+        <if test="selective.headerImage != null" >
+          and header_image = #{selective.headerImage,jdbcType=VARCHAR}
+        </if>
+        <if test="selective.nickName != null" >
+          and nick_name = #{selective.nickName,jdbcType=VARCHAR}
+        </if>
+        <if test="selective.qq != null" >
+          and qq = #{selective.qq,jdbcType=VARCHAR}
+        </if>
+        <if test="selective.phone != null" >
+          and phone = #{selective.phone,jdbcType=VARCHAR}
+        </if>
+        <if test="selective.birthday != null" >
+          and birthday = #{selective.birthday,jdbcType=DATE}
+        </if>
+        <if test="selective.totalTotal != null" >
+          and total_total = #{selective.totalTotal,jdbcType=INTEGER}
+        </if>
+        <if test="selective.dynamicTotal != null" >
+          and dynamic_total = #{selective.dynamicTotal,jdbcType=INTEGER}
+        </if>
+        <if test="selective.isTourist != null" >
+          and is_tourist = #{selective.isTourist,jdbcType=BIT}
+        </if>
+        <if test="selective.isDel != null" >
+          and is_Del = #{selective.isDel,jdbcType=BIT}
+        </if>
+        <if test="selective.createTime != null" >
+          and to_days(create_time) = to_days(#{selective.createTime,jdbcType=TIMESTAMP})
+        </if>
+        <if test="selective.updateTime != null" >
+          and to_days(update_time) = to_days(#{selective.updateTime,jdbcType=TIMESTAMP})
+        </if>
+      </if>
+      <if test="ids != null" >
+        and pk_user_id in (<foreach collection="ids" separator="," item="item"> #{item} </foreach>)
+      </if>
+    </where>
+  </select>
+  <select id="selectCountByWhere" resultType="java.lang.Integer" parameterType="com.firststringboot.repository.domain.User" >
+    select 
+     count(1) 
+    from user
+    <where >
+      <if test="account != null" >
+        and account = #{account,jdbcType=VARCHAR}
+      </if>
+      <if test="name != null" >
+        and name = #{name,jdbcType=VARCHAR}
+      </if>
+      <if test="password != null" >
+        and password = #{password,jdbcType=VARCHAR}
+      </if>
+      <if test="sex != null" >
+        and sex = #{sex,jdbcType=VARCHAR}
+      </if>
+      <if test="salt != null" >
+        and salt = #{salt,jdbcType=VARCHAR}
+      </if>
+      <if test="headerImage != null" >
+        and header_image = #{headerImage,jdbcType=VARCHAR}
+      </if>
+      <if test="nickName != null" >
+        and nick_name = #{nickName,jdbcType=VARCHAR}
+      </if>
+      <if test="qq != null" >
+        and qq = #{qq,jdbcType=VARCHAR}
+      </if>
+      <if test="phone != null" >
+        and phone = #{phone,jdbcType=VARCHAR}
+      </if>
+      <if test="birthday != null" >
+        and birthday = #{birthday,jdbcType=DATE}
+      </if>
+      <if test="totalTotal != null" >
+        and total_total = #{totalTotal,jdbcType=INTEGER}
+      </if>
+      <if test="dynamicTotal != null" >
+        and dynamic_total = #{dynamicTotal,jdbcType=INTEGER}
+      </if>
+      <if test="isTourist != null" >
+        and is_tourist = #{isTourist,jdbcType=BIT}
+      </if>
+      <if test="isDel != null" >
+        and is_Del = #{isDel,jdbcType=BIT}
+      </if>
+      <if test="createTime != null" >
+        and to_days(create_time) = to_days(#{createTime,jdbcType=TIMESTAMP})
+      </if>
+      <if test="updateTime != null" >
+        and to_days(update_time) = to_days(#{updateTime,jdbcType=TIMESTAMP})
+      </if>
+    </where>
+  </select>
+  <insert id="insert" parameterType="com.firststringboot.repository.domain.User" useGeneratedKeys="true" keyProperty="pkUserId" >
+    insert into user (pk_user_id, account, name, 
+      password, sex, salt, 
+      header_image, nick_name, qq, 
+      phone, birthday, total_total, 
+      dynamic_total, is_tourist, is_Del, 
+      create_time, update_time)
+    values (#{pkUserId,jdbcType=BIGINT}, #{account,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
+      #{headerImage,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, #{qq,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{birthday,jdbcType=DATE}, #{totalTotal,jdbcType=INTEGER}, 
+      #{dynamicTotal,jdbcType=INTEGER}, #{isTourist,jdbcType=BIT}, #{isDel,jdbcType=BIT}, 
+      now(), now())
+  </insert>
+  <insert id="batchInsert" parameterType="java.util.List" useGeneratedKeys="true" >
+    insert into user (pk_user_id, 
+      account, name, password, 
+      sex, salt, header_image, 
+      nick_name, qq, phone, 
+      birthday, total_total, dynamic_total, 
+      is_tourist, is_Del, create_time, update_time)
+    values 
+ <foreach collection="records" separator="," item="item">  (#{item.pkUserId,jdbcType=BIGINT}, 
+      #{item.account,jdbcType=VARCHAR}, #{item.name,jdbcType=VARCHAR}, #{item.password,jdbcType=VARCHAR}, 
+      #{item.sex,jdbcType=VARCHAR}, #{item.salt,jdbcType=VARCHAR}, #{item.headerImage,jdbcType=VARCHAR}, 
+      #{item.nickName,jdbcType=VARCHAR}, #{item.qq,jdbcType=VARCHAR}, #{item.phone,jdbcType=VARCHAR}, 
+      #{item.birthday,jdbcType=DATE}, #{item.totalTotal,jdbcType=INTEGER}, #{item.dynamicTotal,jdbcType=INTEGER}, 
+      #{item.isTourist,jdbcType=BIT}, #{item.isDel,jdbcType=BIT}, now(), now())  
+ </foreach>
+  </insert>
+  <insert id="insertSelective" parameterType="com.firststringboot.repository.domain.User" useGeneratedKeys="true" keyProperty="pkUserId" >
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="pkUserId != null" >
+        pk_user_id,
+      </if>
+      <if test="account != null" >
+        account,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="password != null" >
+        password,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="salt != null" >
+        salt,
+      </if>
+      <if test="headerImage != null" >
+        header_image,
+      </if>
+      <if test="nickName != null" >
+        nick_name,
+      </if>
+      <if test="qq != null" >
+        qq,
+      </if>
+      <if test="phone != null" >
+        phone,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="totalTotal != null" >
+        total_total,
+      </if>
+      <if test="dynamicTotal != null" >
+        dynamic_total,
+      </if>
+      <if test="isTourist != null" >
+        is_tourist,
+      </if>
+      <if test="isDel != null" >
+        is_Del,
+      </if>
+      <if test="true" >
+        create_time,
+      </if>
+      <if test="true" >
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="pkUserId != null" >
+        #{pkUserId,jdbcType=BIGINT},
+      </if>
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="headerImage != null" >
+        #{headerImage,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="totalTotal != null" >
+        #{totalTotal,jdbcType=INTEGER},
+      </if>
+      <if test="dynamicTotal != null" >
+        #{dynamicTotal,jdbcType=INTEGER},
+      </if>
+      <if test="isTourist != null" >
+        #{isTourist,jdbcType=BIT},
+      </if>
+      <if test="isDel != null" >
+        #{isDel,jdbcType=BIT},
+      </if>
+      <if test="true" >
+        now(),
+      </if>
+      <if test="true" >
+        now(),
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.firststringboot.repository.domain.User" >
+    update user
+    <set >
+      <if test="account != null" >
+        account = #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        password = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="salt != null" >
+        salt = #{salt,jdbcType=VARCHAR},
+      </if>
+      <if test="headerImage != null" >
+        header_image = #{headerImage,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null" >
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null" >
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null" >
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="totalTotal != null" >
+        total_total = #{totalTotal,jdbcType=INTEGER},
+      </if>
+      <if test="dynamicTotal != null" >
+        dynamic_total = #{dynamicTotal,jdbcType=INTEGER},
+      </if>
+      <if test="isTourist != null" >
+        is_tourist = #{isTourist,jdbcType=BIT},
+      </if>
+      <if test="isDel != null" >
+        is_Del = #{isDel,jdbcType=BIT},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="true" >
+        update_time = now(),
+      </if>
+    </set>
+    where pk_user_id = #{pkUserId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.firststringboot.repository.domain.User" >
+    update user
+    set account = #{account,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      salt = #{salt,jdbcType=VARCHAR},
+      header_image = #{headerImage,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=DATE},
+      total_total = #{totalTotal,jdbcType=INTEGER},
+      dynamic_total = #{dynamicTotal,jdbcType=INTEGER},
+      is_tourist = #{isTourist,jdbcType=BIT},
+      is_Del = #{isDel,jdbcType=BIT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where pk_user_id = #{pkUserId,jdbcType=BIGINT}
+  </update>
+</mapper>

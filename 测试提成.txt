@@ -1,0 +1,54 @@
+注册：
+{
+ "telephone":"",
+"fkClientId":""
+}
+
+
+第三版提成测试：
+[
+{
+ "telephone":"19866986467",
+ "orderNo":"Dd123456",
+ "name":"电子元件",
+ "fkCustomerId":"1",
+ "fkPlatformId":"1",
+ "company":"深圳市九十九度光电技术有限公司",
+ "amount":"50000",
+  "status":"asb"
+},
+{
+ "telephone":"19866986467",
+ "orderNo":"Dd123456",
+ "name":"电子元件",
+ "fkCustomerId":"1",
+ "fkPlatformId":"1",
+ "company":"深圳市九十九度光电技术有限公司",
+ "amount":"50000",
+  "status":"asb"
+},
+{
+ "telephone":"19866986467",
+ "orderNo":"Dd123456",
+ "name":"电子元件",
+ "fkCustomerId":"1",
+ "fkPlatformId":"1",
+ "company":"深圳市九十九度光电技术有限公司",
+ "amount":"50000",
+  "status":"asb"
+}
+]
+
+第二版提成测试
+[
+{
+ "telephone":"17603045714",
+ "orderNo":"Dd123456",
+ "name":"电子元件",
+ "fkCustomerId":"1",
+ "fkPlatformId":"1",
+ "amount":"50000"
+}
+]
+
+
