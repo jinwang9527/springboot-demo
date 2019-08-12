@@ -24,8 +24,10 @@ public class UserServiceImpl implements UserService, Serializable {
 
     @Override
     public User getUser() {
-       PageList<User> users = userMapper.selectObjectListByWhere(new User(),new PageBounds());
-        return users.get(0);
+     //  PageList<User> users = userMapper.selectObjectListByWhere(new User(),new PageBounds());
+        User user = new User();
+        user.setName("张三");
+        return user;
     }
 
     @Override
